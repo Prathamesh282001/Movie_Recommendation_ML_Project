@@ -1,0 +1,88 @@
+{% load static %} 
+<html>
+<head>
+ 
+    <!-- Required meta tags>-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <script>
+        
+        var el = document.querySelector('.button');
+         
+        el.addEventListener('click', function () {
+            var el2 = document.getElementById('.closer');
+            el2.style.display = "none";
+        });
+    </script>
+
+</head>
+
+<body>
+    <header style=" background-color: #011f2a;height: 150%; background-image: url(https://cinebox.vn/en/wp-content/uploads/how-much-does-netflix-pay-for-a-movie-780x470.jpg); 
+    background-size: 100%;opacity: 1;">
+
+        <section class="head-bar">
+            <nav>
+                <ul>
+                    <h1 class = "nav1"><b>Movie Recommendation</b></h1>
+                </ul>
+            </nav>
+        </section>
+
+        <section>
+            <form action="recommendation" method="POST">
+                {% csrf_token %}
+                    <!--<div class="search-container">
+                        <input type="text" name="search" placeholder="Search..." class="search-input">
+                        <a href="#" class="search-btn">
+                                <i class="fas fa-search"></i>-->
+                                <div class="search-container">
+                                    <select class="search-input" id="movies" name="search" aria-label="Default select example">
+                                        {% for i in movie_list %}
+                                        <option value="{{i}}">{{i}}</option>
+                                        {% endfor %}
+                                        
+                                    </select><br>
+                                </div>
+                    <br>
+                    <button class="btn" style="border-radius:15px;height: 50px;" type="submit">Show</button>
+
+            </form>
+        </section>
+       
+
+        {% if status == True %}
+            <section>
+                <div class="img-sec">
+                    <button class="btn2" style="border-radius:10px;height: 40px;float:right;background-color: black;color: white;border: none;
+                    width: 7%;" onclick="this.parentNode.parentNode.remove(); return false;">Clear</button>
+                    
+
+                    <div id="gallery">
+                        {% for i in poster %}
+                            <img class="h-50 rounded w-full object-cover object-center mb-6" src="{{i}}" alt="content">
+                        {% endfor %}
+                    </div>
+                </div>
+
+                
+            </section>
+        {% endif %}
+
+    </header>
+
+    <!--<section class="info">                  
+    </section>-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
